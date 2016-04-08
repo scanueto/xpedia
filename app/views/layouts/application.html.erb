@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Xpedia</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<section id="container" >
+  <%= render partial: "partials/top_bar" %>  
+
+  <%= render partial: "partials/left_menu" %>  
+
+  <section id="main-content">
+    <section class="wrapper">
+
+	  <%= yield %> 
+
+	</section><!-- /wrapper -->
+  </section><!-- /MAIN CONTENT -->
+
+  <%= render partial: "partials/footer" %> 
+</section>
+
+<script>
+  //custom select box
+  $(function(){
+      $('select.styled').customSelect();
+  });
+</script>
+
+</body>
+</html>

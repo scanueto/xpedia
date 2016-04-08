@@ -1,0 +1,59 @@
+<!--sidebar start-->
+<aside>
+    <div id="sidebar"  class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+        
+        	  <p class="centered"><a href="#"><%= image_tag("ui-sam.jpg" ,{class: "img-circle", width: 60} ) %></a></p>
+        	  <h5 class="centered">Lucas Ponce</h5>
+        	  	
+            <li class="mt">
+                <a href="<%= tramites_path()%>">
+                    <i class="fa fa-tasks"></i>
+                    <span>Tramites</span>
+                </a>
+            </li>
+
+            <li class="mt">
+                <a href="<%= new_tramite_path() %>" >
+                    <i class="fa fa-book"></i>
+                    <span>Nuevo Tramite</span>
+                </a>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-cogs"></i>
+                    <span>Components</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="calendar.html">Calendar</a></li>
+                    <li><a  href="gallery.html">Gallery</a></li>
+                    <li><a  href="todo_list.html">Todo List</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-th"></i>
+                    <span>Forms</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="form_component.html">Form Components</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class=" fa fa-bar-chart-o"></i>
+                    <span>Charts</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="morris.html">Morris</a></li>
+                    <li><a  href="chartjs.html">Chartjs</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->
