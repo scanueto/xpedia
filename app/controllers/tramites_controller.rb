@@ -4,6 +4,7 @@ class TramitesController < ApplicationController
   end
 
   def show
+    @tramite = Tramites.find(params[:id])
   end
 
   def new
