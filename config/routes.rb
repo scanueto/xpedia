@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :tramites
 
-  get '/errors', :to => redirect('/static_content/erorrs.html')
+  get '/error', :to => 'static_contents#error', as:'error'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
