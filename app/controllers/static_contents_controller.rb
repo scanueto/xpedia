@@ -1,5 +1,5 @@
 class StaticContentsController < ApplicationController
-  def errors
+  def error
     @errors = params[:errors]
   end
 end

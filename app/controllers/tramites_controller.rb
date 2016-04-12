@@ -18,22 +18,28 @@ class TramitesController < ApplicationController
   def create
     begin
       t = Tramites.new
-      t.id_tramite = Tramites.count + 1
-      t.uf = params[:tramite][:uf]
-      t.id_motivo_tr = params[:tramite][:id_motivo_tr]
-      t.razon_soc = params[:tramite][:razon_soc]
+      t.id_tramite = Tramites.maximum(:id_tramite) + 1
+      t.uf = params[:tramites][:uf]
+      t.id_motivo_tr = params[:tramites][:id_motivo_tr]
+      t.razon_soc = params[:tramites][:razon_soc]
       t.ingreso_fh = DateTime.now
-      t.ingreso_login = 'ruby'
+      t.ingreso_login = 'alespi'
       t.id_sc = 111
       t.id_canal = 'P'
       t.soluciona_incidente = false
+      t.estado = 'P'
+      t.interno = false
+      t.id_sr_actual = 1
+      t.id_msr_actual = 1
+      t.id_nodo_actual = 1
+      t.descripcion = 'creado por ruby on rails!'
       if t.save
       	redirect_to tramites_path
       else
-        redirect_to error_path, t.errors.full_messages.to_sentence
+        redirect_to error_path, errors: ('else = '+t.errors.full_messages.to_sentence)
       end 
     rescue Exception => e
-      redirect_to error_path errors:e.message
+      redirect_to error_path errors:('raise = '+e.message)
       #redirect_to controller: 'static_contents', action: 'errors', errors: e.message + ' <br> ' + e.backtrace.inspect
     end   
   end
