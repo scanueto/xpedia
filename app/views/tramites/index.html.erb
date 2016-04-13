@@ -2,25 +2,7 @@
 
 <div class="col-md-12 mt">
 	<div class="content-panel">
-      <table class="table table-hover">
-	  	  <h4><i class="fa fa-angle-right"></i> Mostrando Ultimos <%= @tramites.count %></h4>
-	  	  <hr>
-          <thead>
-          <tr>
-              <th>#</th>
-              <th>id_sc</th>
-              <th>ingreso</th>
-              <th>login</th>
-              <th>nombre</th>
-              <th>descripcion</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @tramites.each do |t| %>
-			  <%= render partial: "tramite", locals: { tramite: t } %>
-			<% end %>
-          </tbody>
-      </table>
+      <%= @tabla.to_html %>
 	</div><!--/content-panel -->
 </div><!-- /col-md-12 -->
 </div><!-- row -->

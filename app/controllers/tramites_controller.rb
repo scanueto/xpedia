@@ -1,6 +1,7 @@
 class TramitesController < ApplicationController
   def index
   	@tramites = Tramites.order(id_tramite: :desc).limit(10)
+    @tabla = Table.new(Tramites.column_names, @tramites)
   end
 
   def show
