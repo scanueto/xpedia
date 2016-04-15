@@ -9,28 +9,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<section id="container" >
+
   <%= render partial: "partials/top_bar" %>  
 
-  <%= render partial: "partials/left_menu" %>  
+  <%= render partial: "partials/menu" %>  
 
-  <section id="main-content">
-    <section class="wrapper">
+  <!-- Page container -->
+  <div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+      <!-- Main content -->
+      <div class="content-wrapper">
 
-	  <%= yield %> 
+	    <%= yield %> 
+      
+      </div>
 
-	</section><!-- /wrapper -->
-  </section><!-- /MAIN CONTENT -->
+      <!-- /main content -->
+    </div>
+    <!-- /page content -->
+  </div>
+  <!-- /page container -->
 
   <%= render partial: "partials/footer" %> 
-</section>
-
-<script>
-  //custom select box
-  $(function(){
-      $('select.styled').customSelect();
-  });
-</script>
 
 </body>
 </html>

@@ -1,20 +1,18 @@
-<table class="table table-hover">
-  <h4><i class="fa fa-angle-right"></i> </h4>
-  <hr>
-    <thead>
+<table class="table datatable-basic">
+  <thead>
     <tr>
-    <% columns.each do |c| %>
-      <th><%= c.to_s %></th>
-    <% end %>
+      <% columns.each do |c| %>
+        <th><%= c.to_s %></th>
+      <% end %>
     </tr>
-    </thead>
-    <tbody>
-      <% datasource.each do |object| %>
-      <tr>
-        <% columns.each do |c| %>
-        <td><%= object[c.to_s] %></td>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
+  </thead>
+  <tbody>
+    <% datasource.each do |object| %>
+    <tr>
+      <% columns.each do |c| %>
+      <td><%= object[c.to_s] %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
