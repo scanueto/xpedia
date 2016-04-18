@@ -6,34 +6,28 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-lg-2">Motivo</label>
-        <div class="col-lg-10">
-          <%= f.text_field :id_motivo_tr, {class: "form-control", placeholder: "ej. 12"} %>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="control-label col-lg-2">Nombre</label>
         <div class="col-lg-10">
           <%= f.text_field :razon_soc, {class: "form-control", placeholder: "ej. ROQUE RABUFFETI"} %>
         </div>
     </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Motivo</label>
+        <div class="col-lg-10">
+          <%= f.collection_select(:id_motivo_tr, @motivos, :id_motivo_tr, :descripcion, {},{class: "selectbox"}) %>
+        </div>
+    </div>
+    
 
-    <%= content_tag :button, :type => :submit, :class => 'btn bg-purple-400 btn-labeled btn-xs' do %>
-      <b><i class="fa fa-check-circle-o"></i></b>
-      Crear
-    <% end %>&nbsp;&nbsp;
-    <%= content_tag :button, :type => :submit, :class => 'btn bg-pink-400 btn-labeled btn-xs' do %>
-      <b><i class="icon-check"></i></b>
-      Crear
-    <% end %>&nbsp;&nbsp;
-    <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs' do %>
-      <b><i class="glyphicon glyphicon-thumbs-up"></i></b>
-      Crear
-    <% end %>&nbsp;&nbsp;
-    <%= content_tag :button, :type => :submit, :class => 'btn bg-teal-400 btn-labeled btn-xs' do %>
+    <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs pull-right' do %>
       <b><i class="icon-checkmark4"></i></b>
       Crear
-    <% end %><br>
+    <% end %>
 
 <% end %>
 
+<%= javascript_tag do %>
+  $('.selectbox').selectBoxIt({
+        autoWidth: false
+    });
+<% end %>

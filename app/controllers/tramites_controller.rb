@@ -10,6 +10,7 @@ class TramitesController < ApplicationController
 
   def new
     @tramite = Tramites.new
+    @motivos = MotivosTr.limit(10)
   end
 
   def edit
