@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  root to: 'tramites#index'
+  root to: 'consultas#index'
 
   resources :tramites
+
+  resources :consultas
 
   get '/error', :to => 'static_contents#error', as:'error'
 

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cod_canal: MyString
+  descripcion: MyString
+
+two:
+  cod_canal: MyString
+  descripcion: MyString

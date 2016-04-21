@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona_id: 1
+  pregunta: MyText
+  respuesta: MyText
+  id_canal_preg: 1
+  id_canal_resp: 1
+  login_alta: MyString
+  estado: MyString
+  fh_respuesta: 2016-04-20 12:41:08
+
+two:
+  persona_id: 1
+  pregunta: MyText
+  respuesta: MyText
+  id_canal_preg: 1
+  id_canal_resp: 1
+  login_alta: MyString
+  estado: MyString
+  fh_respuesta: 2016-04-20 12:41:08

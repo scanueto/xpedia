@@ -1,0 +1,32 @@
+<%= form_for @consulta, html: {:class => "form-horizontal"} do |f| %>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Pregunta</label>
+        <div class="col-lg-10">
+          <%= f.text_field :pregunta, {class: "form-control", placeholder: "ej. Que hora es?"} %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Respuesta</label>
+        <div class="col-lg-10">
+          <%= f.text_field :respuesta, {class: "form-control", placeholder: "ej. Son las 5 menos 5"} %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Motivo</label>
+        <div class="col-lg-10">
+          <%= f.collection_select(:id_canal_preg, @canales, :id, :descripcion, {},{class: "selectbox"}) %>
+        </div>
+    </div>
+
+    <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs pull-right' do %>
+      <b><i class="icon-checkmark4"></i></b>
+      Crear
+    <% end %>
+
+<% end %>
+
+<%= javascript_tag do %>
+  $('.selectbox').selectBoxIt({
+        autoWidth: false
+    });
+<% end %>
