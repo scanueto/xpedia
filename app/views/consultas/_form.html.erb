@@ -1,22 +1,37 @@
 <%= form_for @consulta, html: {:class => "form-horizontal"} do |f| %>
+  <form class="stepy-basic" action="#">
+  <fieldset title="Step 1">
+    <legend class="text-semibold">Ubicar Persona</legend>
     <div class="form-group">
+        <label class="control-label col-lg-2">Persona</label>
+        <div class="col-lg-10">
+          <%= f.text_field :persona_id, {class: "form-control", placeholder: "Nro. o Razón Social. ej. 23456789"} %>
+        </div>
+    </div>
+  </fieldset>
+
+  <fieldset title="Step 2">
+    <legend class="text-semibold">Datos Consulta</legend>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Canal</label>
+        <div class="col-lg-10">
+          <%= f.collection_select(:id_canal_preg, @canales, :id, :descripcion, {},{class: "selectbox"}) %>
+        </div>
+    </div>
+     <div class="form-group">
         <label class="control-label col-lg-2">Pregunta</label>
         <div class="col-lg-10">
           <%= f.text_field :pregunta, {class: "form-control", placeholder: "ej. Que hora es?"} %>
         </div>
     </div>
-    <div class="form-group">
+     <div class="form-group">
         <label class="control-label col-lg-2">Respuesta</label>
         <div class="col-lg-10">
           <%= f.text_field :respuesta, {class: "form-control", placeholder: "ej. Son las 5 menos 5"} %>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-lg-2">Motivo</label>
-        <div class="col-lg-10">
-          <%= f.collection_select(:id_canal_preg, @canales, :id, :descripcion, {},{class: "selectbox"}) %>
-        </div>
-    </div>
+  </fieldset>
+</form>
 
     <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs pull-right' do %>
       <b><i class="icon-checkmark4"></i></b>
@@ -25,8 +40,34 @@
 
 <% end %>
 
-<%= javascript_tag do %>
+ <%= javascript_tag do %>
+
+
+  $.fn.stepy.defaults.legend = false;
+  $.fn.stepy.defaults.transition = 'fade';
+  $.fn.stepy.defaults.duration = 150;
+  $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
+  $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
+ 
+  $(".steps-basic").steps({
+        headerTag: "h6",
+        bodyTag: "fieldset",
+        transitionEffect: "fade",
+        titleTemplate: '<span class="number">#index#</span> #title#',
+        labels: {
+            finish: 'Submit'
+        },
+        onFinished: function (event, currentIndex) {
+            alert("Form submitted.");
+        }
+    });
+  
+  $('.stepy-step').find('.button-next').addClass('btn btn-primary');
+  $('.stepy-step').find('.button-back').addClass('btn btn-default');
+
   $('.selectbox').selectBoxIt({
         autoWidth: false
     });
+
 <% end %>
+
