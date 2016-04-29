@@ -1,12 +1,21 @@
 class ConsultasController < ApplicationController
+  respond_to :html, :json
   def index
     @consultas = Consulta.order(id: :desc).limit(10)
-    @tabla = Table.new(["id", "pregunta", "respuesta", "login_alta", "estado"], @consultas)
+    @tabla = Table.new(["id", "persona_id", "pregunta", "respuesta", "login_alta", "estado"], @consultas)
+    if(params.has_key?(:q))
+      @personas = Persona.where("LOWER(razon) LIKE ?", "%#{params[:q].downcase}%").order(id: :desc)
+      respond_with @personas
+    else 
+      render :nothing => true
+    end
+    
   end
 
   def new
     @consulta = Consulta.new
     @canales = Canal.all
+    @personas = Persona.order(id: :desc).limit(10)
   end
 
   def edit
@@ -23,7 +32,7 @@ class ConsultasController < ApplicationController
       c.id_canal_preg = params[:consulta][:id_canal_preg]
       c.estado = 'P'
       c.login_alta = 'desarrollo'
-      c.persona_id = 2
+      c.persona_id = params[:persona]
 
       if c.save
         redirect_to consultas_path

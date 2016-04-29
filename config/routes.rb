@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :consultas
 
+  resources :personas
+
   get '/error', :to => 'static_contents#error', as:'error'
 
   # The priority is based upon order of creation: first created -> highest priority.

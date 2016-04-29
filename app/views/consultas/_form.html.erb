@@ -1,21 +1,20 @@
-<%= form_for @consulta, html: {:class => "form-horizontal"} do |f| %>
-  <form class="stepy-basic" action="#">
-  <fieldset title="Step 1">
-    <legend class="text-semibold">Ubicar Persona</legend>
+<%= form_for @consulta, html: {:class => "form-horizontal stepy-basic"} do |f| %>
+  <fieldset title="1">
+    <legend class="text-semibold">Identificar Persona</legend>
     <div class="form-group">
         <label class="control-label col-lg-2">Persona</label>
         <div class="col-lg-10">
-          <%= f.text_field :persona_id, {class: "form-control", placeholder: "Nro. o Razón Social. ej. 23456789"} %>
+          <%= select_tag "persona", options_from_collection_for_select(@personas,"id","razon"),include_blank: true, id: "ajax-persona", data: {placeholder: "Seleccionar persona"} %>
         </div>
     </div>
   </fieldset>
 
-  <fieldset title="Step 2">
+  <fieldset title="2">
     <legend class="text-semibold">Datos Consulta</legend>
     <div class="form-group">
         <label class="control-label col-lg-2">Canal</label>
         <div class="col-lg-10">
-          <%= f.collection_select(:id_canal_preg, @canales, :id, :descripcion, {},{class: "selectbox"}) %>
+          <%= f.collection_select(:id_canal_preg, @canales, :id, :descripcion, {},{class: "selectbox", id: "scanales"}) %>
         </div>
     </div>
      <div class="form-group">
@@ -31,43 +30,81 @@
         </div>
     </div>
   </fieldset>
-</form>
-
-    <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs pull-right' do %>
-      <b><i class="icon-checkmark4"></i></b>
-      Crear
-    <% end %>
-
+   <fieldset title="3">
+    <legend class="text-semibold">Guardar</legend>
+    
+  </fieldset>
+     <%= content_tag :button, :type => :submit, :class => 'btn btn-primary stepy-finish' do %>
+     Crear<i class="icon-check position-right"></i>
+     <% end %>
 <% end %>
 
  <%= javascript_tag do %>
 
 
-  $.fn.stepy.defaults.legend = false;
-  $.fn.stepy.defaults.transition = 'fade';
-  $.fn.stepy.defaults.duration = 150;
-  $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
-  $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
- 
-  $(".steps-basic").steps({
-        headerTag: "h6",
-        bodyTag: "fieldset",
-        transitionEffect: "fade",
-        titleTemplate: '<span class="number">#index#</span> #title#',
-        labels: {
-            finish: 'Submit'
+$(function() {
+
+    $('#scanales').select2();
+    //persona select2
+    $('#ajax-persona').select2({
+      placeholder: "Elija la persona",
+      allowClear: true,
+      ajax:{
+        url: "<%= consultas_path(format: 'json') %>",
+        dataType: "json",
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
         },
-        onFinished: function (event, currentIndex) {
-            alert("Form submitted.");
-        }
-    });
-  
-  $('.stepy-step').find('.button-next').addClass('btn btn-primary');
-  $('.stepy-step').find('.button-back').addClass('btn btn-default');
-
-  $('.selectbox').selectBoxIt({
-        autoWidth: false
+        processResults: function (data, params) {
+          return {
+            results: 
+              $.map( data, function(p, i) {return { id: p.id, text: p.razon }}),
+          };
+        },
+        cache: true
+      }
     });
 
+    // Override defaults
+    $.fn.stepy.defaults.legend = false;
+    $.fn.stepy.defaults.transition = 'fade';
+    $.fn.stepy.defaults.duration = 150;
+    $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
+    $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
+
+
+
+    // Wizard examples
+    // ------------------------------
+
+    // Basic wizard setup
+    $(".stepy-basic").stepy();
+
+
+
+    // Initialize plugins
+    // ------------------------------
+
+    // Apply "Back" and "Next" button styling
+    $('.stepy-step').find('.button-next').addClass('btn btn-primary');
+    $('.stepy-step').find('.button-back').addClass('btn btn-default');
+
+    // Styled checkboxes and radios
+    $('.styled').uniform({
+        radioClass: 'choice'
+    });
+
+
+    // Styled file input
+    $('.file-styled').uniform({
+        fileButtonClass: 'action btn bg-blue'
+    });
+    
+});
+ 
 <% end %>
 

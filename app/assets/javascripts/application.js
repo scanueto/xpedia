@@ -10,9 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
+//= require plugins/loaders/pace.min
+//= require core/libraries/jquery.min
+//= require core/libraries/bootstrap.min
+//= require plugins/loaders/blockui.min
+//= require plugins/ui/nicescroll.min
+//= require plugins/ui/drilldown
 
-//= require_tree .
+//= require plugins/forms/wizards/stepy.min.js
+//= require plugins/forms/selects/select2.min
+//= require plugins/forms/styling/uniform.min
+//= require core/libraries/jasny_bootstrap.min
+//= require plugins/forms/validation/validate.min
+//= require core/app.js
 
-jQuery.noConflict();
+
+
+  
