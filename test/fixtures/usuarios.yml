@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  login: MyString
+  nombre: MyString
+  email: MyString
+  tel: MyString
+  canal_id: 1
+  admin: false
+  fh_baja: 2016-05-02 18:15:16
+  habilitado: false
+  last_action: 2016-05-02 18:15:16
+
+two:
+  login: MyString
+  nombre: MyString
+  email: MyString
+  tel: MyString
+  canal_id: 1
+  admin: false
+  fh_baja: 2016-05-02 18:15:16
+  habilitado: false
+  last_action: 2016-05-02 18:15:16

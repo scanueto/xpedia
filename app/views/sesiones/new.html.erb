@@ -1,0 +1,30 @@
+<%= form_tag sesiones_path do %>
+<div class="panel panel-body login-form">
+	<div class="text-center">
+		<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+		<h5 class="content-group">Ingrese a su Cuenta <small class="display-block">Escriba sus credenciales</small></h5>
+	</div>
+
+	<div class="form-group has-feedback has-feedback-left">
+		<%= text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Usuario o Email' %>
+		<div class="form-control-feedback">
+			<i class="icon-user text-muted"></i>
+		</div>
+	</div>
+
+	<div class="form-group has-feedback has-feedback-left">
+		<%= password_field_tag :password, nil, class: 'form-control', placeholder: 'Password'%>
+		<div class="form-control-feedback">
+			<i class="icon-lock2 text-muted"></i>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary btn-block">Ingresar <i class="icon-circle-right2 position-right"></i></button>
+	</div>
+
+	<div class="text-center">
+		<a href="login_password_recover.html">Olvidé mi Password</a>
+	</div>
+</div>
+<% end %>

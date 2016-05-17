@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420164108) do
+ActiveRecord::Schema.define(version: 20160502221516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,30 @@ ActiveRecord::Schema.define(version: 20160420164108) do
   add_index "personas", ["razon"], name: "index_xp_personas_on_razon", using: :btree
   add_index "personas", ["tipo_doc", "nro_doc"], name: "index_xp_personas_on_tipo_doc_and_nro_doc", unique: true, using: :btree
 
+  create_table "usuarios", force: :cascade do |t|
+    t.string   "login",                  limit: 30,                 null: false
+    t.string   "password_digest"
+    t.string   "nombre",                 limit: 50
+    t.string   "email",                  limit: 50
+    t.string   "telefono",               limit: 25
+    t.integer  "canal_id"
+    t.boolean  "admin",                             default: false
+    t.datetime "fh_baja"
+    t.boolean  "habilitado",                        default: true
+    t.datetime "last_action"
+    t.string   "auth_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+  end
+
+  add_index "usuarios", ["auth_token"], name: "index_xp_usuarios_on_auth_token", using: :btree
+  add_index "usuarios", ["email"], name: "index_xp_usuarios_on_email", unique: true, using: :btree
+  add_index "usuarios", ["login"], name: "index_xp_usuarios_on_login", unique: true, using: :btree
+
   add_foreign_key "consultas", "canales", column: "id_canal_preg"
   add_foreign_key "consultas", "canales", column: "id_canal_resp"
   add_foreign_key "consultas", "personas"
+  add_foreign_key "usuarios", "canales"
 end

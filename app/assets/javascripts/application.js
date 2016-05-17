@@ -17,8 +17,10 @@
 //= require plugins/ui/nicescroll.min
 //= require plugins/ui/drilldown
 
+//= require plugins/tables/datatables/datatables.min
 //= require plugins/forms/wizards/stepy.min.js
 //= require plugins/forms/selects/select2.min
+//= require plugins/notifications/sweet_alert.min
 //= require plugins/forms/styling/uniform.min
 //= require core/libraries/jasny_bootstrap.min
 //= require plugins/forms/validation/validate.min

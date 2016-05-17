@@ -35,5 +35,11 @@
 
   <%= render partial: "partials/footer" %> 
 
+  <%= javascript_tag do %>
+
+  <%= yield :js %>
+
+  <% end %>
+
 </body>
 </html>

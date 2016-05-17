@@ -1,0 +1,68 @@
+<table class="table datatable-basic">
+  <thead>
+    <tr class='bg-success-700'>
+        <th>#</th>
+        <th>Persona</th>
+        <th>Pregunta</th>
+        <th>Respuesta</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% consultas.each do |consulta| %>
+    <tr>
+      <td><%= consulta.id %></td>
+      <td><%= consulta.persona.razon %></td>
+      <td><%= consulta.pregunta %></td>
+      <td><%= consulta.respuesta %></td>
+      <td><span class="label <%= consulta.getEstadoClass %>"><%= consulta.estado %></span></td>
+      <td><%= l(consulta.created_at, format: '%d de %B de %Y') %></td>
+      <td><%= consulta.login_alta %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% content_for :js do %>
+$(function() {
+$.extend( $.fn.dataTable.defaults, {
+        autoWidth: false,
+        columnDefs: [{ 
+            orderable: false,
+            width: '100px',
+            targets: [ 5 ]
+        }],
+        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+        language: {
+            search: '<span>Filtro:</span> _INPUT_',
+            lengthMenu: '<span>Ver:</span> _MENU_',
+            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+        },
+        drawCallback: function () {
+            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+        },
+        preDrawCallback: function() {
+            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+        }
+    });
+
+$('.datatable-basic').DataTable();
+
+// Add placeholder to the datatable filter option
+$('.dataTables_filter input[type=search]').attr('placeholder','Escriba para filtrar...');
+
+
+// Enable Select2 select for the length option
+$('.dataTables_length select').select2({
+    minimumResultsForSearch: Infinity,
+    width: 'auto'
+});
+
+
+$('.dataTables_info').html($('.dataTables_info').html().replace('Showing','Mostrando').replace('to','a').replace('of','de').replace('entries','registros'));
+
+});
+
+<% end %>

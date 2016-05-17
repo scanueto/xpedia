@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
 
+
   root to: 'consultas#index'
+
+
+  get 'login', to: 'sesiones#new', as: 'login'
+  get 'logout', to: 'sesiones#destroy', as: 'logout'
 
   resources :tramites
 
   resources :consultas
 
   resources :personas
+
+  resources :sesiones
+
+  resources :usuarios
 
   get '/error', :to => 'static_contents#error', as:'error'
 

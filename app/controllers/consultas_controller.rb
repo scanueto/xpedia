@@ -1,15 +1,24 @@
 class ConsultasController < ApplicationController
+  include SesionesHelper
+
+  before_filter :signed_in_user
+
   respond_to :html, :json
   def index
     @consultas = Consulta.order(id: :desc).limit(10)
-    @tabla = Table.new(["id", "persona_id", "pregunta", "respuesta", "login_alta", "estado"], @consultas)
-    if(params.has_key?(:q))
-      @personas = Persona.where("LOWER(razon) LIKE ?", "%#{params[:q].downcase}%").order(id: :desc)
-      respond_with @personas
-    else 
-      render :nothing => true
+
+    respond_to do |format|
+      format.html
+      format.json {
+        if(params.has_key?(:q))
+          @personas = Persona.where("LOWER(razon) LIKE ?", "%#{params[:q].downcase}%").order(id: :desc)
+          respond_with @personas
+        else 
+          render nothing: true
+        end
+      }
     end
-    
+
   end
 
   def new

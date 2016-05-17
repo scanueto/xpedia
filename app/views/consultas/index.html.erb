@@ -1,19 +1,32 @@
+<% content_for :header do %>
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Consultas</span> </h4>
+
+				<ul class="breadcrumb breadcrumb-caret position-right">
+					<li><a href="<%= root_url %>">Inicio</a></li>
+					<li class="active">Consultas</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+<% end %>
+
 <div class="row">
-<div class="col-md-2">
-</div>
 <div class="col-md-8">
-<div class="panel panel-flat">
-  <div class="panel-heading">
-    <h5 class="panel-title">Listado</h5>
+<div class="panel">
+  <div class="panel-heading bg-success">
+    <h5 class="panel-title">Listado de Consultas</h5>
     <div class="heading-elements">
       <ul class="icons-list">
         <li><a data-action="collapse"></a></li>
-        <li><a data-action="reload"></a></li>
-        <li><a data-action="close"></a></li>
       </ul>
     </div>
   </div>
-  <%= @tabla.to_html %>
+  <%= render partial: "/grids/consultas_grid", locals:{consultas: @consultas} %>
 </div>
 </div>
 </div>

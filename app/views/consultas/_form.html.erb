@@ -39,12 +39,13 @@
      <% end %>
 <% end %>
 
- <%= javascript_tag do %>
+<%= javascript_tag do %>
 
 
 $(function() {
 
     $('#scanales').select2();
+    
     //persona select2
     $('#ajax-persona').select2({
       placeholder: "Elija la persona",
@@ -73,8 +74,8 @@ $(function() {
     $.fn.stepy.defaults.legend = false;
     $.fn.stepy.defaults.transition = 'fade';
     $.fn.stepy.defaults.duration = 150;
-    $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
-    $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
+    $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Anterior';
+    $.fn.stepy.defaults.nextLabel = 'Siguiente <i class="icon-arrow-right14 position-right"></i>';
 
 
 
