@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get '/error', :to => 'static_contents#error', as:'error'
 
+  get 'query_persona', to: 'searches#query_persona', as: 'query_persona'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -36,7 +38,7 @@ Rails.application.routes.draw do
 
   # Example resource route with options:
   #   resources :products do
-  #     member do
+  #     member d
   #       get 'short'
   #       post 'toggle'
   #     end

@@ -4,7 +4,7 @@
     <div class="form-group">
         <label class="control-label col-lg-2">Persona</label>
         <div class="col-lg-10">
-          <%= select_tag "persona", options_from_collection_for_select(@personas,"id","razon"),include_blank: true, id: "ajax-persona", data: {placeholder: "Seleccionar persona"} %>
+          <%= render partial: "/controls/selects/select_persona", locals:{personas: @personas, select_id: 'spersona'} %>
         </div>
     </div>
   </fieldset>
@@ -39,13 +39,14 @@
      <% end %>
 <% end %>
 
-<%= javascript_tag do %>
+ <%= javascript_tag do %>
 
 
 $(function() {
 
+    //Canales 
     $('#scanales').select2();
-    
+
     //persona select2
     $('#ajax-persona').select2({
       placeholder: "Elija la persona",
@@ -74,8 +75,8 @@ $(function() {
     $.fn.stepy.defaults.legend = false;
     $.fn.stepy.defaults.transition = 'fade';
     $.fn.stepy.defaults.duration = 150;
-    $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Anterior';
-    $.fn.stepy.defaults.nextLabel = 'Siguiente <i class="icon-arrow-right14 position-right"></i>';
+    $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Back';
+    $.fn.stepy.defaults.nextLabel = 'Next <i class="icon-arrow-right14 position-right"></i>';
 
 
 
