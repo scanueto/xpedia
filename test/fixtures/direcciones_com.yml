@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  monoblock: MyString
+  escalera: MyString
+  piso: MyString
+  depto: MyString
+  casa: MyString
+  manzana: MyString
+  observacion: MyString
+
+two:
+  monoblock: MyString
+  escalera: MyString
+  piso: MyString
+  depto: MyString
+  casa: MyString
+  manzana: MyString
+  observacion: MyString

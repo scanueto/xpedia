@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona_id: 1
+  area_id: 1
+  numero: MyString
+  fh_alta: 2016-05-19 15:36:43
+  login_alta: MyString
+  valido: false
+  principal: false
+  red_tipo: MyString
+  telefono_tipo: MyString
+
+two:
+  persona_id: 1
+  area_id: 1
+  numero: MyString
+  fh_alta: 2016-05-19 15:36:43
+  login_alta: MyString
+  valido: false
+  principal: false
+  red_tipo: MyString
+  telefono_tipo: MyString

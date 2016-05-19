@@ -46,4 +46,13 @@ class ConsultasController < ApplicationController
 
   def destroy
   end
+
+  def persona_show
+    puts params[:q]
+    @persona = Persona.find params[:q]
+    respond_to do |format|
+        format.js
+    end
+    #redirect_to error_path errors: 'pasa por persona_show'
+  end
 end

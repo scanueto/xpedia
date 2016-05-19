@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  imponible_id: 1
+  imponible_type: MyString
+  fh_alta: 2016-05-17 18:02:56
+  login_alta: MyString
+  situacion: MyString
+
+two:
+  imponible_id: 1
+  imponible_type: MyString
+  fh_alta: 2016-05-17 18:02:56
+  login_alta: MyString
+  situacion: MyString

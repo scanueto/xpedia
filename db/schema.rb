@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502221516) do
+ActiveRecord::Schema.define(version: 20160519183741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,64 @@ ActiveRecord::Schema.define(version: 20160502221516) do
 
   add_index "consultas", ["persona_id"], name: "index_xp_consultas_on_persona_id", using: :btree
 
+  create_table "direcciones", force: :cascade do |t|
+    t.integer  "eje_calle_id"
+    t.integer  "calle_id"
+    t.integer  "entre1_id"
+    t.integer  "entre2_id"
+    t.integer  "localidad_id"
+    t.float    "altura"
+    t.string   "descripcion"
+    t.string   "calle"
+    t.string   "entre1"
+    t.string   "entre2"
+    t.boolean  "fidelizacion"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "direcciones", ["calle", "altura"], name: "index_xp_direcciones_on_calle_and_altura", using: :btree
+  add_index "direcciones", ["calle"], name: "index_xp_direcciones_on_calle", using: :btree
+
+  create_table "direcciones_com", force: :cascade do |t|
+    t.string   "monoblock"
+    t.string   "escalera"
+    t.string   "piso"
+    t.string   "depto"
+    t.string   "casa"
+    t.string   "manzana"
+    t.string   "observacion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "imponibles", force: :cascade do |t|
+    t.integer  "imponible_id"
+    t.string   "imponible_type"
+    t.datetime "fh_alta"
+    t.string   "login_alta"
+    t.string   "situacion"
+    t.integer  "titular_id"
+    t.integer  "responsable_pago_id"
+    t.integer  "direccion_id"
+    t.integer  "direccion_com_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "imponibles", ["imponible_id", "imponible_type"], name: "index_xp_imponibles_on_imponible_id_and_imponible_type", unique: true, using: :btree
+
+  create_table "persona_mailes", force: :cascade do |t|
+    t.integer  "persona_id"
+    t.datetime "fh_alta"
+    t.string   "login_alta"
+    t.boolean  "valido"
+    t.boolean  "principal"
+    t.string   "mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "personas", force: :cascade do |t|
     t.integer  "persona_cod",            null: false
     t.string   "razon",                  null: false
@@ -52,6 +110,20 @@ ActiveRecord::Schema.define(version: 20160502221516) do
   add_index "personas", ["persona_cod"], name: "index_xp_personas_on_persona_cod", using: :btree
   add_index "personas", ["razon"], name: "index_xp_personas_on_razon", using: :btree
   add_index "personas", ["tipo_doc", "nro_doc"], name: "index_xp_personas_on_tipo_doc_and_nro_doc", unique: true, using: :btree
+
+  create_table "personas_telefono", force: :cascade do |t|
+    t.integer  "persona_id"
+    t.integer  "area_id"
+    t.string   "numero"
+    t.datetime "fh_alta"
+    t.string   "login_alta"
+    t.boolean  "valido"
+    t.boolean  "principal"
+    t.string   "red_tipo"
+    t.string   "telefono_tipo"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "login",                  limit: 30,                 null: false
@@ -78,5 +150,10 @@ ActiveRecord::Schema.define(version: 20160502221516) do
   add_foreign_key "consultas", "canales", column: "id_canal_preg"
   add_foreign_key "consultas", "canales", column: "id_canal_resp"
   add_foreign_key "consultas", "personas"
+  add_foreign_key "imponibles", "direcciones"
+  add_foreign_key "imponibles", "direcciones_com"
+  add_foreign_key "imponibles", "personas", column: "responsable_pago_id"
+  add_foreign_key "imponibles", "personas", column: "titular_id"
+  add_foreign_key "imponibles", "usuarios", column: "login_alta", primary_key: "login"
   add_foreign_key "usuarios", "canales"
 end

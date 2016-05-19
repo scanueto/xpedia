@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get 'query_persona', to: 'searches#query_persona', as: 'query_persona'
 
+  get 'persona_show', to: 'consultas#persona_show', as: 'persona_show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

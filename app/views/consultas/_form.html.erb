@@ -2,9 +2,13 @@
   <fieldset title="1">
     <legend class="text-semibold">Identificar Persona</legend>
     <div class="form-group">
-        <label class="control-label col-lg-2">Persona</label>
+        <label class="control-label col-lg-2">Nombre/Doc/Nro</label>
         <div class="col-lg-10">
           <%= render partial: "/controls/selects/select_persona", locals:{personas: @personas, select_id: 'spersona'} %>
+        </div>
+        <div class="row">
+          <div class="col-md-12" id="div_persona_show" style="margin-top:10px;">
+          </div>
         </div>
     </div>
   </fieldset>
@@ -47,30 +51,7 @@ $(function() {
     //Canales 
     $('#scanales').select2();
 
-    //persona select2
-    $('#ajax-persona').select2({
-      placeholder: "Elija la persona",
-      allowClear: true,
-      ajax:{
-        url: "<%= consultas_path(format: 'json') %>",
-        dataType: "json",
-        delay: 250,
-        data: function (params) {
-          return {
-            q: params.term, // search term
-            page: params.page
-          };
-        },
-        processResults: function (data, params) {
-          return {
-            results: 
-              $.map( data, function(p, i) {return { id: p.id, text: p.razon }}),
-          };
-        },
-        cache: true
-      }
-    });
-
+    
     // Override defaults
     $.fn.stepy.defaults.legend = false;
     $.fn.stepy.defaults.transition = 'fade';
@@ -105,6 +86,14 @@ $(function() {
     $('.file-styled').uniform({
         fileButtonClass: 'action btn bg-blue'
     });
+
+    $("#spersona").on("select2:select", function(e) {
+          console.log(e.params['data']['id']);
+          $.ajax({url: "<%= persona_show_path() %>", data: {q: e.params['data']['id']}});
+    }).on("select2:unselect", function(e) {
+          console.log("unselect");
+          $("#div_persona_show").html("");
+    });;
     
 });
  

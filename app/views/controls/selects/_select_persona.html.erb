@@ -1,9 +1,8 @@
 <%= select_tag "persona", options_from_collection_for_select(personas,"id","razon"),include_blank: true, id: select_id, data: {placeholder: "Seleccionar persona"} %>
 
- <% content_for :js do %>
+<% content_for :js do %>
  $(function() {
-    //persona select2
-    
+
     $('#<%=select_id%>').select2({
       placeholder: "Elija la persona",
       allowClear: true,
@@ -20,13 +19,12 @@
         processResults: function (data, params) {
           return {
             results: 
-              $.map( data, function(p, i) {return { id: p.id, text: p.razon }}),
+              $.map( data, function(p, i) {return { id: p.id, text: p.razon + " " + p.tipo_doc + ":" + p.nro_doc }}),
           };
         },
         cache: true
       }
     });
-
-    
-});
- <%end%>
+   
+ });
+<%end%>
