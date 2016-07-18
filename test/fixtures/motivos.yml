@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  motivo: MyString
+  prioridad: 1
+  habilitado: false
+
+two:
+  motivo: MyString
+  prioridad: 1
+  habilitado: false

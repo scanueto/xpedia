@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  motivo_id: 1
+  sector_id: 1
+  estado: MyString
+  canal_id: 1
+  login_alta: MyString
+  login_cierre: MyString
+  fh_cierre: 2016-05-31 00:04:04
+  prioridad: 1
+  auditado: false
+  imponible_id: 1
+  observacion: MyText
+  ocupado_por: MyString
+  codigo_externo: MyString
+  login_ult_evo: MyString
+  fh_ult_evo: 2016-05-31 00:04:04
+  nodo_id: 1
+  persona_id: 1
+
+two:
+  motivo_id: 1
+  sector_id: 1
+  estado: MyString
+  canal_id: 1
+  login_alta: MyString
+  login_cierre: MyString
+  fh_cierre: 2016-05-31 00:04:04
+  prioridad: 1
+  auditado: false
+  imponible_id: 1
+  observacion: MyText
+  ocupado_por: MyString
+  codigo_externo: MyString
+  login_ult_evo: MyString
+  fh_ult_evo: 2016-05-31 00:04:04
+  nodo_id: 1
+  persona_id: 1

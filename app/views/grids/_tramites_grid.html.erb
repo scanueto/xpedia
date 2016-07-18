@@ -1,0 +1,88 @@
+<table class="table datatable-basic">
+  <thead>
+    <tr class='bg-info-700'>
+        <th>#</th>
+        <th>Persona</th>
+        <th>Motivo</th>
+        <th>Sector</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Observacion</th>
+        <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tramites.each do |tramite| %>
+    <tr>
+      <td><%= tramite.id %></td>
+      <td><%= tramite.persona.razon %></td>
+      <td><%= tramite.motivo.motivo %></td>
+      <td><%= tramite.sector.sector %></td>
+      <td><span class="label <%= tramite.getEstadoClass %>"><%= tramite.estado %></span></td>
+      <td><%= l(tramite.created_at, format: '%d de %B de %Y') %></td>
+      <td><%= tramite.observacion %></td>
+      <td class="text-center">
+        <ul class="icons-list">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-menu7"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to(edit_tramite_path(tramite.id)) do %>
+                  <%= content_tag(:i, '',class: 'icon-file-text2') + "Ver Trámite" %> 
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(edit_tramite_path(tramite.id)) do %>
+                  <%= content_tag(:i, '',class: 'icon-file-locked') + "Ocupar Trámite" %> 
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% content_for :js do %>
+$(function() {
+$.extend( $.fn.dataTable.defaults, {
+        autoWidth: false,
+        columnDefs: [{ 
+            orderable: false,
+            width: '100px',
+            targets: [ 5 ]
+        }],
+        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+        language: {
+            search: '<span>Filtro:</span> _INPUT_',
+            lengthMenu: '<span>Ver:</span> _MENU_',
+            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+        },
+        drawCallback: function () {
+            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+        },
+        preDrawCallback: function() {
+            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+        }
+    });
+
+$('.datatable-basic').DataTable();
+
+// Add placeholder to the datatable filter option
+$('.dataTables_filter input[type=search]').attr('placeholder','Escriba para filtrar...');
+
+
+// Enable Select2 select for the length option
+$('.dataTables_length select').select2({
+    minimumResultsForSearch: Infinity,
+    width: 'auto'
+});
+
+
+$('.dataTables_info').html($('.dataTables_info').html().replace('Showing','Mostrando').replace('to','a').replace('of','de').replace('entries','registros'));
+
+});
+
+<% end %>

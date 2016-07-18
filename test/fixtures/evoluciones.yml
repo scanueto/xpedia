@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tramite_id: 1
+  login: MyString
+  sector_origen_id: 1
+  sector_destino_id: 1
+  nodo_origen_id: 1
+  nodo_destino_id: 1
+  observacion: MyText
+  secuencia: 1
+
+two:
+  tramite_id: 1
+  login: MyString
+  sector_origen_id: 1
+  sector_destino_id: 1
+  nodo_origen_id: 1
+  nodo_destino_id: 1
+  observacion: MyText
+  secuencia: 1

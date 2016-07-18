@@ -1,0 +1,30 @@
+<%= select_tag "imponible", options_from_collection_for_select(imponibles,"id","imponible_id"),include_blank: true, id: select_id, data: {placeholder: "Seleccionar un Imponible"} %>
+
+<% content_for :js do %>
+ $(function() {
+
+    $('#<%=select_id%>').select2({
+      placeholder: "Elija un Imponible",
+      allowClear: true,
+      ajax:{
+        url: "<%= query_imponible_path(format: 'json') %>",
+        dataType: "json",
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        processResults: function (data, params) {
+          return {
+            results: 
+              $.map( data, function(p, i) {return { id: p.id, text: 'Imponible ' + p.id }}),
+          };
+        },
+        cache: true
+      }
+    });
+   
+ });
+<%end%>

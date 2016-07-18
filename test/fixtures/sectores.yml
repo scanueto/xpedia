@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  habilitado: false
+  fh_baja: 2016-05-30 16:22:08
+
+two:
+  nombre: MyString
+  habilitado: false
+  fh_baja: 2016-05-30 16:22:08
