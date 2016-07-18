@@ -20,8 +20,11 @@ Rails.application.routes.draw do
   get '/error', :to => 'static_contents#error', as:'error'
 
   get 'query_persona', to: 'searches#query_persona', as: 'query_persona'
+  get 'query_imponible', to: 'searches#query_imponible', as: 'query_imponible'
 
   get 'persona_show', to: 'consultas#persona_show', as: 'persona_show'
+
+  get ':controller/:action(/:id)'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

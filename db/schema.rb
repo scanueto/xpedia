@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519183741) do
+ActiveRecord::Schema.define(version: 20160601040027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 20160519183741) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "evoluciones", force: :cascade do |t|
+    t.integer  "tramite_id"
+    t.string   "login",             limit: 30
+    t.integer  "sector_origen_id"
+    t.integer  "sector_destino_id"
+    t.integer  "nodo_origen_id"
+    t.integer  "nodo_destino_id"
+    t.text     "observacion"
+    t.integer  "secuencia"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "evoluciones", ["tramite_id"], name: "index_xp_evoluciones_on_tramite_id", using: :btree
+
   create_table "imponibles", force: :cascade do |t|
     t.integer  "imponible_id"
     t.string   "imponible_type"
@@ -84,6 +99,14 @@ ActiveRecord::Schema.define(version: 20160519183741) do
   end
 
   add_index "imponibles", ["imponible_id", "imponible_type"], name: "index_xp_imponibles_on_imponible_id_and_imponible_type", unique: true, using: :btree
+
+  create_table "motivos", force: :cascade do |t|
+    t.string   "motivo"
+    t.integer  "prioridad"
+    t.boolean  "habilitado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "persona_mailes", force: :cascade do |t|
     t.integer  "persona_id"
@@ -125,6 +148,38 @@ ActiveRecord::Schema.define(version: 20160519183741) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "sectores", force: :cascade do |t|
+    t.string   "sector"
+    t.boolean  "habilitado"
+    t.datetime "fh_baja"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tramites", force: :cascade do |t|
+    t.integer  "motivo_id",                                 null: false
+    t.integer  "sector_id",                                 null: false
+    t.string   "estado",         limit: 1,                  null: false
+    t.integer  "canal_id",                                  null: false
+    t.string   "login_alta",     limit: 30
+    t.string   "login_cierre",   limit: 30
+    t.datetime "fh_cierre"
+    t.integer  "prioridad"
+    t.boolean  "auditado",                  default: false
+    t.integer  "imponible_id"
+    t.text     "observacion"
+    t.string   "ocupado_por",    limit: 30
+    t.string   "codigo_externo", limit: 30
+    t.string   "login_ult_evo",  limit: 30
+    t.datetime "fh_ult_evo"
+    t.integer  "nodo_id"
+    t.integer  "persona_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "tramites", ["motivo_id"], name: "index_xp_tramites_on_motivo_id", using: :btree
+
   create_table "usuarios", force: :cascade do |t|
     t.string   "login",                  limit: 30,                 null: false
     t.string   "password_digest"
@@ -150,10 +205,17 @@ ActiveRecord::Schema.define(version: 20160519183741) do
   add_foreign_key "consultas", "canales", column: "id_canal_preg"
   add_foreign_key "consultas", "canales", column: "id_canal_resp"
   add_foreign_key "consultas", "personas"
+  add_foreign_key "evoluciones", "sectores", column: "sector_destino_id"
+  add_foreign_key "evoluciones", "sectores", column: "sector_origen_id"
+  add_foreign_key "evoluciones", "tramites"
   add_foreign_key "imponibles", "direcciones"
   add_foreign_key "imponibles", "direcciones_com"
   add_foreign_key "imponibles", "personas", column: "responsable_pago_id"
   add_foreign_key "imponibles", "personas", column: "titular_id"
   add_foreign_key "imponibles", "usuarios", column: "login_alta", primary_key: "login"
+  add_foreign_key "tramites", "canales"
+  add_foreign_key "tramites", "motivos"
+  add_foreign_key "tramites", "personas"
+  add_foreign_key "tramites", "sectores"
   add_foreign_key "usuarios", "canales"
 end

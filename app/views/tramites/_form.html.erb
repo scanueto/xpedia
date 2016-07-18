@@ -1,33 +1,89 @@
-<%= form_for @tramite, url: tramites_url, html: {:class => "form-horizontal"} do |f| %>
+<%= form_for @tramite, url: tramites_url, html: {:class => "form-horizontal stepy-basic"} do |f| %>
+  <fieldset title="1">
+    <legend class="text-semibold">Identificar Imponible y Persona</legend>
     <div class="form-group">
-        <label class="control-label col-lg-2">Unidad</label>
+        <label class="control-label col-lg-2">Nro Imponible</label>
         <div class="col-lg-10">
-          <%= f.text_field :uf, {class: "form-control", placeholder: "ej. 1234567"} %>
+          <%= render partial: "/controls/selects/select_imponible", locals:{imponibles: @imponibles, select_id: 'simponible'} %>
+        </div>
+        <div class="row">
+          <div class="col-md-12" id="div_persona_show" style="margin-top:10px;">
+          </div>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-lg-2">Nombre</label>
         <div class="col-lg-10">
-          <%= f.text_field :razon_soc, {class: "form-control", placeholder: "ej. ROQUE RABUFFETI"} %>
+          <%= text_field_tag :razon_soc, nil, {class: "form-control", placeholder: "ej. ROQUE RABUFFETI"} %>
         </div>
     </div>
+  </fieldset>
+
+  <fieldset title="2">
+    <legend class="text-semibold">Datos Tramite</legend>
     <div class="form-group">
         <label class="control-label col-lg-2">Motivo</label>
         <div class="col-lg-10">
-          <%= f.collection_select(:id_motivo_tr, @motivos, :id_motivo_tr, :descripcion, {},{class: "selectbox"}) %>
+          <%= f.collection_select(:motivo_id, @motivos, :id, :motivo, {},{id: "smotivos"}) %>
         </div>
     </div>
-    
 
-    <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs pull-right' do %>
+    <div class="form-group">
+        <label class="control-label col-lg-2">Sector</label>
+        <div class="col-lg-10">
+          <%= f.collection_select(:sector_id, @sectores, :id, :sector, {},{id: "ssectores"}) %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-2">Canal</label>
+        <div class="col-lg-10">
+          <%= f.collection_select(:canal_id, @canales, :id, :descripcion, {},{id: "scanales"}) %>
+        </div>
+    </div>
+  </fieldset>    
+
+    <%= content_tag :button, :type => :submit, :class => 'btn bg-info btn-labeled btn-xs pull-right stepy-finish' do %>
       <b><i class="icon-checkmark4"></i></b>
       Crear
     <% end %>
 
+
 <% end %>
 
 <%= javascript_tag do %>
-  $('.selectbox').selectBoxIt({
-        autoWidth: false
+  $(function() {
+
+    //Canales 
+    $('#scanales').select2();
+    $('#smotivos').select2();
+    $('#ssectores').select2();
+
+    $.fn.stepy.defaults.legend = false;
+    $.fn.stepy.defaults.transition = 'fade';
+    $.fn.stepy.defaults.duration = 150;
+    $.fn.stepy.defaults.backLabel = '<i class="icon-arrow-left13 position-left"></i> Ant.';
+    $.fn.stepy.defaults.nextLabel = 'Sig. <i class="icon-arrow-right14 position-right"></i>';
+
+    $(".stepy-basic").stepy();
+
+    $('.stepy-step').find('.button-next').addClass('btn btn-primary');
+    $('.stepy-step').find('.button-back').addClass('btn btn-default');
+
+    $('.styled').uniform({
+        radioClass: 'choice'
     });
+    $('.file-styled').uniform({
+        fileButtonClass: 'action btn bg-blue'
+    });
+
+    $("#simponible").on("select2:select", function(e) {
+          console.log(e.params['data']['id']);
+          //$.ajax({url: "<%= persona_show_path() %>", data: {q: e.params['data']['id']}});
+    }).on("select2:unselect", function(e) {
+          console.log("unselect");
+          $("#div_persona_show").html("");
+    });;
+    
+});
 <% end %>
